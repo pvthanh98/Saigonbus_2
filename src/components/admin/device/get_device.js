@@ -7,6 +7,7 @@ import ActiveBluePrint from "./active_blueprint";
 import tick from "../../../tick.png";
 import { animateScroll as scroll } from "react-scroll";
 import busImg from "../../../asset/img/bus.png";
+import DeviceDetail from './deviceDetail';
 
 import { socket } from "../admin";
 var async = require("async");
@@ -262,13 +263,22 @@ class Device extends React.Component {
 			cpu_usage = "",
 			number_of_sessions = "",
 			ram = "",
-			ramTotal = "";
+			ramTotal = "",
+			driver="",
+			assistant="",
+			assistant_img = "",
+			driver_img = "";
+
 		if (deviceDetails && deviceDetails.data) {
 			cpu_temp = deviceDetails.data.cpu_temp;
 			cpu_usage = deviceDetails.data.cpu_usage;
 			number_of_sessions = deviceDetails.data.number_of_sessions;
 			ram = deviceDetails.data.ram.available;
 			ramTotal = deviceDetails.data.ram.total;
+			driver = deviceDetails.bus_driver;
+			assistant = deviceDetails.assistant;
+			assistant_img = deviceDetails.assistant_img;
+			driver_img = deviceDetails.driver_img;
 		}
 		return (
 			<div className="col-md-12">
@@ -463,52 +473,17 @@ class Device extends React.Component {
 								</div>
 								<div>
 									<div className="modal-body">
-										<table id="deviceDetailTable">
-											<tbody>
-												<tr>
-													<td>
-														<i className="material-icons">
-															devices_other
-														</i>{" "}
-														CPU
-													</td>
-													<td>{cpu_temp} %</td>
-												</tr>
-												<tr>
-													<td>
-														<i className="material-icons">
-															people
-														</i>{" "}
-														Số lượng truy cập:
-													</td>
-													<td>
-														{number_of_sessions}{" "}
-														người
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<i className="material-icons">
-															memory
-														</i>
-														Ram
-													</td>
-													<td>
-														{ram} / {ramTotal}{" "}
-														bytes
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<i className="material-icons">
-															select_all
-														</i>
-														CPU sử dụng
-													</td>
-													<td>{cpu_usage} %</td>
-												</tr>
-											</tbody>
-										</table>
+										<DeviceDetail 
+											driver={driver} 
+											assistant={assistant}
+											driver_img={driver_img}
+											assistant_img={assistant_img}
+											cpu_usage={cpu_usage} 
+											cpu_temp={cpu_temp} 
+											number_of_sessions={number_of_sessions}
+											ram={ram}
+											ramTotal={ramTotal}
+										/>
 									</div>
 								</div>
 								<button

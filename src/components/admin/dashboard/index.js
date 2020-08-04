@@ -7,6 +7,7 @@ import OndayAccess from "./onday_access";
 import DeviceQuantity from "./device_quantity";
 import AdQuantity from "./ad_quantity";
 import {socket} from '../admin';
+import { animateScroll as scroll } from 'react-scroll'
 class Index extends React.Component {
 	constructor(props) {
 		super(props);

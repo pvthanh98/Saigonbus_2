@@ -179,7 +179,7 @@ class Config extends React.Component {
 			this.setState({
 				isLoad: true,
 			});
-			axios
+			axios()
 				.post("/api/create_blueprint", body)
 				.then((res) => {
 					if (res.status === 200) this.onLoadConfig();
@@ -216,6 +216,8 @@ class Config extends React.Component {
 	};
 
 	onDeleteBlueprint = (id) => {
+		this.setState({isLoad:true})
+		scroll.scrollToTop();
 		axios()
 			.delete(
 				"https://sensorhub.tech/api/delete_blueprint",
@@ -224,7 +226,14 @@ class Config extends React.Component {
 				}
 			)
 			.then((res) => {
-				if (res.status === 200) this.onLoadConfig();
+				if (res.status === 200){
+					this.onLoadConfig();
+				}
+			}).catch(err=>{
+				if(err.response && err.response.status === 400){
+					alert("Có lỗi: Bảng cài đặt này có thể đang được kích hoạt")
+					this.setState({isLoad:false})
+				}
 			});
 	};
 

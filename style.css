@@ -36,8 +36,3 @@ html, body {
 .deviceDetailTable tr td{
     padding: 16px
 }
-
-.avt_img {
-    width: 40px;
-    border-radius: 50%;
-}

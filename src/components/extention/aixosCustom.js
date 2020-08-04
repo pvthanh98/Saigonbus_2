@@ -3,7 +3,6 @@ import axios from "axios";
 const axiosCustom = ()=>{
 	const axiosIns = axios.create({
 		baseURL: "https://sensorhub.tech/",
-		timeout: 5000,
 		headers: {
 			authorization: `Bearer ${localStorage.getItem('token')}`,
 		},
